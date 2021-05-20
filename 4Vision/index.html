@@ -93,7 +93,7 @@
 
                 </form>
             </div>
-            <!--/.navbar-collapse -->
+            <!--navbar-collapse -->
         </div>
     </nav>
 
@@ -162,8 +162,11 @@
         </div>
 
     </div>
+    
+    <!--This is Affectiva's SDK-->
     <script src="https://download.affectiva.com/js/3.2.1/affdex.js"></script>
     <script type="text/javascript" src="process.js"></script>
+    <!--D3 is the graph library-->
     <script src="https://d3js.org/d3.v4.js"></script>
 
     <script>
@@ -176,7 +179,7 @@
         function randomNumberBounds(min, max) {
             return Math.floor(Math.random() * max) + min;
         }
-
+        
         function seedData() {
             var now = new Date();
             for (var i = 0; i < MAX_LENGTH; ++i) {
@@ -188,7 +191,8 @@
                 });
             }
         }
-
+        
+        //This is the event listener that starts functioning as soon as a human face is detected
         detector.addEventListener("onImageResultsSuccess", function (faces, image, timestamp) {
             document.querySelector('#results').innerHTML = "";
 
@@ -196,15 +200,19 @@
                 log('#results', "Emoji: " + faces[0].emojis.dominantEmoji);
                 if (document.querySelector('#face_video_canvas') != null)
                     drawFeaturePoints(image, faces[0].featurePoints);
-
+                
                 var now = new Date();
+                //this dictionary here declares the desired metrics and assigns them to their value
                 var lineData = {
                     time: now,                  
                     Confusion: faces[0].expressions.browFurrow.toFixed(0),
                     Attention: faces[0].expressions.attention.toFixed(0),
                     Engagement: faces[0].emotions.engagement.toFixed(0),                    
                 };
+                
                 var audio = new Audio('goes-without-saying.mp3');
+                
+                //This chunck plays the audio and the alert message if the user's facial coordinates indicates that he is asleep
                 if (faces[0].featurePoints[31].y - faces[0].featurePoints[30].y <= 2.5 || faces[0].featurePoints[33].y - faces[0].featurePoints[32].y <= 2.5) {
                     lineData.Attention = .2 * lineData.Attention;
                     audio.play();
@@ -223,7 +231,7 @@
             }
         });
 
-        //this is the function that executes when the newly added button is clicked (It downloads the file with the data)
+        //this function executes when the download button is clicked - it downloads a csv file with all the dataof the chosen metrics
         function download_csv(lineArr) {
             var encodedUri = encodeURI(csvContent);
             window.open(encodedUri);
@@ -236,7 +244,8 @@
             chart.width(+d3.select("#chart").style("width").replace(/(px)/g, ""));
             d3.select("#chart").call(chart);
         }
-
+        
+        //Code initializer
         document.addEventListener("DOMContentLoaded", function () {
             seedData();
             window.setInterval(updateData, 1000);
