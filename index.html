@@ -2,7 +2,8 @@
 
 <head>
     <title>4VSN Students :)</title>
-    <link rel="shortcut icon" type="image/png" href="https://www.affectiva.com/wp-content/themes/affectiva-2018-child/img/favicon.ico">
+    <link rel="shortcut icon" type="image/png"
+        href="https://www.affectiva.com/wp-content/themes/affectiva-2018-child/img/favicon.ico">
     <style>
         body {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -20,7 +21,8 @@
             display: inline !important;
         }
     </style>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <meta charset="utf-8" />
     <link type="text/css" rel="stylesheet" href="node_modules/@zoomus/websdk/dist/css/bootstrap.css" />
     <link type="text/css" rel="stylesheet" href="node_modules/@zoomus/websdk/dist/css/react-select.css" />
@@ -39,20 +41,22 @@
             <div id="navbar" class="websdktest">
                 <form class="navbar-form navbar-right" id="meeting_form">
                     <div class="form-group">
-                        <input type="text" name="display_name" id="display_name" style="width:150px" value="1.7.10#Local" maxLength="100"
-                               placeholder="Name" class="form-control" required>
+                        <input type="text" name="display_name" id="display_name" style="width:150px"
+                            value="1.7.10#Local" maxLength="100" placeholder="Name" class="form-control" required>
                     </div>
                     <div class="form-group" style="margin: 6px">
                         <input type="text" name="meeting_number" id="meeting_number" value="" maxLength="200"
-                               style="width:190px; margin-left:-6px; margin-right:-6px" placeholder="Meeting Number" class="form-control" required>
+                            style="width:190px; margin-left:-6px; margin-right:-6px" placeholder="Meeting Number"
+                            class="form-control" required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="meeting_pwd" id="meeting_pwd" value="" style="width:150px"
-                               maxLength="32" placeholder="Meeting Password" class="form-control">
+                            maxLength="32" placeholder="Meeting Password" class="form-control">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="meeting_email" id="meeting_email" value="" style="width:150px; color:darkgray"
-                               maxLength="32" placeholder="Email option" class="form-control">
+                        <input type="text" name="meeting_email" id="meeting_email" value=""
+                            style="width:150px; color:darkgray" maxLength="32" placeholder="Email option"
+                            class="form-control">
                     </div>
                     <div class="form-group">
                         <select id="meeting_role" class="sdk-select" style="color:black">
@@ -85,10 +89,12 @@
                     </div>
 
                     <input type="hidden" value="" id="copy_link_value" />
-                    <button type="submit" style="margin-right:15px" class="btn btn-primary" id="join_meeting">Join</button>
+                    <button type="submit" style="margin-right:15px" class="btn btn-primary"
+                        id="join_meeting">Join</button>
                     <button type="submit" class="btn btn-primary" id="join_iframe">Join iFrame</button>
                     <button type="submit" class="btn btn-primary" id="clear_all">Clear</button>
-                    <button type="button" link="" onclick="window.copyJoinLink('#copy_join_link')" class="btn btn-primary" id="copy_join_link">Copy Direct join link</button>
+                    <button type="button" link="" onclick="window.copyJoinLink('#copy_join_link')"
+                        class="btn btn-primary" id="copy_join_link">Copy Direct join link</button>
 
 
                 </form>
@@ -99,7 +105,8 @@
 
 
     <div id="show-test-tool">
-        <button type="submit" class="btn btn-primary" id="show-test-tool-btn" style="margin: 6px; margin-top:-1px" title="show or hide top test tool">Show</button>
+        <button type="submit" class="btn btn-primary" id="show-test-tool-btn" style="margin: 6px; margin-top:-1px"
+            title="show or hide top test tool">Show</button>
     </div>
     <script>
         document.getElementById('show-test-tool-btn').addEventListener("click", function (e) {
@@ -127,7 +134,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <div class="row" id="affdex_elements" style="width:610px;height:480px; margin-left:-5px; margin-right: 15px"></div>
+                <div class="row" id="affdex_elements"
+                    style="width:610px;height:480px; margin-left:-5px; margin-right: 15px"></div>
                 <div class="row" style="margin-top: 1px;"></div>
                 <div class="row" style="margin-right: -30px; border-right: 1px solid hotpink;">
                     <div class="row" style="margin: 0 auto; margin-top: 1px;">
@@ -162,7 +170,7 @@
         </div>
 
     </div>
-    
+
     <!--This is Affectiva's SDK-->
     <script src="https://download.affectiva.com/js/3.2.1/affdex.js"></script>
     <script type="text/javascript" src="process.js"></script>
@@ -172,14 +180,16 @@
     <script>
         let csvContent = "data:text/csv;charset=utf-8,";
         var lineArr = [];
+        let oneSecData = [];
         var MAX_LENGTH = 100;
+        let startTime = new Date();
         var duration = 500;
         var chart = realTimeLineChart();
 
         function randomNumberBounds(min, max) {
             return Math.floor(Math.random() * max) + min;
         }
-        
+
         function seedData() {
             var now = new Date();
             for (var i = 0; i < MAX_LENGTH; ++i) {
@@ -187,11 +197,11 @@
                     time: new Date(now.getTime() - ((MAX_LENGTH - i) * duration)),
                     Confusion: 0,
                     Attention: 0,
-                    Engagement: 0                    
+                    Engagement: 0
                 });
             }
         }
-        
+
         //This is the event listener that starts functioning as soon as a human face is detected
         detector.addEventListener("onImageResultsSuccess", function (faces, image, timestamp) {
             document.querySelector('#results').innerHTML = "";
@@ -200,18 +210,24 @@
                 log('#results', "Emoji: " + faces[0].emojis.dominantEmoji);
                 if (document.querySelector('#face_video_canvas') != null)
                     drawFeaturePoints(image, faces[0].featurePoints);
-                
+
                 var now = new Date();
                 //this dictionary here declares the desired metrics and assigns them to their value
                 var lineData = {
-                    time: now,                  
+                    time: now,
                     Confusion: faces[0].expressions.browFurrow.toFixed(0),
                     Attention: faces[0].expressions.attention.toFixed(0),
-                    Engagement: faces[0].emotions.engagement.toFixed(0),                    
+                    Engagement: faces[0].emotions.engagement.toFixed(0),
                 };
-                
+
+                if ((new Date() - startTime) >= 1000) {
+                    let data = { ...lineData, emoji: faces[0].emojis.dominantEmoji };
+                    oneSecData.push(data)
+                    startTime = new Date();
+                }
+
                 var audio = new Audio('goes-without-saying.mp3');
-                
+
                 //This chunck plays the audio and the alert message if the user's facial coordinates indicates that he is asleep
                 if (faces[0].featurePoints[31].y - faces[0].featurePoints[30].y <= 2.5 || faces[0].featurePoints[33].y - faces[0].featurePoints[32].y <= 2.5) {
                     lineData.Attention = .2 * lineData.Attention;
@@ -232,9 +248,25 @@
         });
 
         //this function executes when the download button is clicked - it downloads a csv file with all the dataof the chosen metrics
-        function download_csv(lineArr) {
-            var encodedUri = encodeURI(csvContent);
-            window.open(encodedUri);
+        function download_csv() {
+            let csvContent = "time,confusion,attention,engagement,emoji\n" + oneSecData.map(e => `${e.time},${e.Confusion},${e.Attention},${e.Engagement},${e.emoji}`).join("\n");
+
+            var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            if (navigator.msSaveBlob) { // IE 10+
+                navigator.msSaveBlob(blob, "emotions_data.csv");
+            } else {
+                var link = document.createElement("a");
+                if (link.download !== undefined) { // feature detection
+                    // Browsers that support HTML5 download attribute
+                    var url = URL.createObjectURL(blob);
+                    link.setAttribute("href", url);
+                    link.setAttribute("download", "emotions_data.csv");
+                    link.style.visibility = 'hidden';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            }
         }
 
         function resize() {
@@ -244,7 +276,7 @@
             chart.width(+d3.select("#chart").style("width").replace(/(px)/g, ""));
             d3.select("#chart").call(chart);
         }
-        
+
         //Code initializer
         document.addEventListener("DOMContentLoaded", function () {
             seedData();
@@ -310,4 +342,3 @@
 </body>
 
 </html>
-
